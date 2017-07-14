@@ -1,0 +1,92 @@
+/****************************************/
+/*              Fonts
+/****************************************/
+h1 {
+  font-size: 2.2em;
+}
+
+p {
+  font-size: 1.1em;
+}
+
+/****************************************/
+/*              App Header
+/****************************************/
+.app {
+  text-align: center;
+}
+
+.appLogo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.appHeader {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  margin-bottom: 40px;
+  color: white;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/****************************************/
+/*              Intro
+/****************************************/
+
+#appIntro {
+  margin-bottom: 30px;
+}
+
+#startButton {
+  padding: 15px 72px;
+  font-size: 1.1em;
+}
+
+/****************************************/
+/*             Place Bets
+/****************************************/
+
+.placeBet {
+  width: 100%
+}
+
+#betAmount {
+  display: inline;
+}
+
+.betModifier {
+  margin: auto 20px 20px 20px;
+  padding: 8px 15px;
+  font-size: 1.1em;
+}
+
+#quickAddLabel {
+  font-size: 0.9em;
+  display:inline;
+  padding-right: 5px;
+}
+
+.quickBetModifier {
+  margin: auto 2px 10px 2px;
+  padding: 4px 7px;
+  font-size: 0.7em;
+}
+
+#resetBet {
+  margin-left: 20px;
+}
+
+#placeBet {
+  display: inline-block;
+}
+
+.modifierButtons {
+  padding: 15px 72px;
+  margin: 10px;
+  font-size: 1.1em;
+}
