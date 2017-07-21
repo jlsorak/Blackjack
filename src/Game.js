@@ -5,23 +5,28 @@ import Deck from './Deck.js';
 const blackjack = require('engine-blackjack')
 const actions = blackjack.actions
 const GameEngine = blackjack.Game
-
 const game = new GameEngine()
 
 class Game extends Component {
   constructor () {
     super()
+    console.log(game.getState().stage)
     this.startGame = this.startGame.bind(this)
     this.placeBet = this.placeBet.bind(this)
-    this.getPlayerCards = this.getPlayerCards.bind(this)
+    this.getInitialCards = this.getInitialCards.bind(this)
+    this.playerHit = this.playerHit.bind(this)
     this.state = {
       gameStarted: false,
-      betAmount: 0, 
+      betAmount: 0,
       playerCards: [],
       dealerCards: []
     }
-    console.dir(game.getState())
   }
+
+  componentDidMount() {
+    this.getInitialCards();
+  }
+
 
   startGame() {
     this.setState((prevState, props) => {
@@ -31,16 +36,33 @@ class Game extends Component {
     })
   }
 
-  getPlayerCards(amount) {
+  getInitialCards(amount) {
+    game.dispatch(actions.deal())
+    console.log(game.getState())
+
     this.setState((prevState, props) => {
       return {
         dealerCards: [
-          {number: 5, suit: 'hearts'},
-          {number: 3, suit: 'clubs'},
-          {number: 7, suit: 'hearts'}
+          {number: game.getState().dealerCards[0].text, suit: game.getState().dealerCards[0].suite},
+          {number: "reverse", suit: "card"}
+        ],
+        playerCards: [
+          {number: game.getState().handInfo.right.cards[0].text, suit: game.getState().handInfo.right.cards[0].suite},
+          {number: game.getState().handInfo.right.cards[1].text, suit: game.getState().handInfo.right.cards[1].suite}
         ]
       }
     })
+
+    return (
+      <div>
+      <button className="modifierButtons">Hit</button>
+      <button className="modifierButtons">Stick</button>
+      </div>
+    )
+  }
+
+  playerHit() {
+    
   }
 
   placeBet(betAmount) {
@@ -52,13 +74,11 @@ class Game extends Component {
   }
 
   render() {
-
     if(this.state.betAmount > 0) {
       return (
         <div>
-        <button onClick={this.getPlayerCards}>Get player cards</button>
-        <Deck cards={this.state.playerCards} />
         <Deck cards={this.state.dealerCards} />
+        <Deck cards={this.state.playerCards} />
         </div>
       )
     }
@@ -66,20 +86,20 @@ class Game extends Component {
     if(this.state.gameStarted) {
       return (
         <div>
-          <PlaceBet placeBet={this.placeBet} />
+        <PlaceBet placeBet={this.placeBet} />
 
-          <p>You betted: {this.state.betAmount}</p>
+        <p>You betted: {this.state.betAmount}</p>
         </div>
       )
     }
     return (
       <div>
-        <p id="appIntro">
-          Click 'play' to get started.
-        </p>
-        <button id="startButton" onClick={this.startGame}>
-          Play
-        </button>
+      <p id="appIntro">
+      Click 'play' to get started.
+      </p>
+      <button id="startButton" onClick={this.startGame}>
+      Play
+      </button>
       </div>
     )
   }

@@ -90,3 +90,51 @@ p {
   margin: 10px;
   font-size: 1.1em;
 }
+
+/****************************************/
+/*             Game Screen
+/****************************************/
+
+.cards {
+  height: 25vh;
+  margin: 5px 10px;
+}
+
+
+/****************************************/
+/*             Card animatiosn
+/****************************************/
+
+.slide-in-left
+.slide-in-right {
+  animation-timing-function: linear;
+}
+
+.slide-in-left {
+  animation: 1s slide-in-left 1;
+  transform: translate(-$window-width, 150px) rotate(-50deg);
+}
+
+.slide-in-right {
+  animation: 1s slide-in-right 1;
+  transform: translate($window-width, 150px) rotate(50deg);;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translate(-80vw, 50px) rotate(-40deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translate(80vw, -50px) rotate(-40deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+
+}
