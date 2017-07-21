@@ -90,20 +90,23 @@ class Game extends Component {
   }
 
   dealerHit() {
-    //game.dispatch(actions.dealerHit(game.getState().dealerHoleCard))
+    game.dispatch(actions.stand('right'))
     console.log(game.getState())
-    // const cards = game.getState().handInfo.right.cards;
-    // const playerCards = cards.map(card => {
-    //   return {
-    //     number: card.text,
-    //     suit: card.suite
-    //   }
-    // })
-    // this.setState((prevState,props) => {
-    //   return {
-    //     playerCards
-    //   }
-    // })
+    const cards = game.getState().dealerCards;
+    const dealerCards = cards.map(card => {
+      return {
+        number: card.text,
+        suit: card.suite
+      }
+    })
+    this.setState((prevState,props) => {
+      return {
+        dealerCards
+      }
+    })
+    this.checkGameStatus()
+  }
+
 
 
     //const cards = game.getState()
@@ -115,7 +118,7 @@ class Game extends Component {
     //     }
     //   })
     //   console.log(game.getState())
-     }
+
 
     render() {
       if(this.state.betAmount > 0) {
