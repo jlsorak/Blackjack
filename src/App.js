@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="appHeader">
-          <img src='/cards/ace_of_spades.svg' className="appLogo" alt="logo" />
+            <img src='/cards/ace_of_spades.svg' className="appLogo" alt="logo" />
           <h1>Blackjack</h1>
         </div>
         <Game/>

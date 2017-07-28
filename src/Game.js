@@ -16,6 +16,8 @@ class Game extends Component {
     this.getInitialCards = this.getInitialCards.bind(this)
     this.playerHit = this.playerHit.bind(this)
     this.dealerHit = this.dealerHit.bind(this)
+    this.getDealerValue = this.getDealerValue.bind(this)
+    this.getPlayerValue = this.getPlayerValue.bind(this)
     this.state = {
       gameStarted: false,
       betAmount: 0,
@@ -80,6 +82,38 @@ class Game extends Component {
     this.checkGameStatus()
   }
 
+  dealerHit() {
+    game.dispatch(actions.stand('right'))
+    console.log(game.getState())
+
+    const removeOne = this.state.dealerCards.slice()
+    removeOne.splice(1, 1)
+
+    this.setState((prevState, props) => {
+      return {
+
+        dealerCards: [
+          {number: game.getState().dealerCards[0].text, suit: game.getState().dealerCards[0].suite},
+          {number: game.getState().dealerCards[1].text, suit: game.getState().dealerCards[1].suite}
+        ]
+      }
+    })
+
+    // const cards = game.getState().dealerCards
+    // const dealerCards = cards.map(card => {
+    //   return {
+    //     number: card.text,
+    //     suit: card.suite
+    //   }
+    // })
+    // this.setState((prevState,props) => {
+    //   return {
+    //     dealerCards
+    //   }
+    // })
+    this.checkGameStatus()
+  }
+
   checkGameStatus() {
     const playerCheck = game.getState().handInfo.right;
     if (playerCheck.playerHasBlackjack) {
@@ -87,27 +121,14 @@ class Game extends Component {
     } else if (playerCheck.playerHasBusted) {
       console.log('bust!')
     }
+
+    const dealerCheck = game.getState();
+    if (dealerCheck.hasBlackjack) {
+      console.log('dealer has blackjack')
+    } else if (dealerCheck.dealerHasBusted) {
+      console.log('dealer bust!')
+    }
   }
-
-  dealerHit() {
-    game.dispatch(actions.stand('right'))
-    console.log(game.getState())
-    const cards = game.getState().dealerCards;
-    const dealerCards = cards.map(card => {
-      return {
-        number: card.text,
-        suit: card.suite
-      }
-    })
-    this.setState((prevState,props) => {
-      return {
-        dealerCards
-      }
-    })
-    this.checkGameStatus()
-  }
-
-
 
     //const cards = game.getState()
     // this.setState((prevState,props) => {
@@ -119,15 +140,57 @@ class Game extends Component {
     //   })
     //   console.log(game.getState())
 
+    getDealerValue() {
+      const dealerValue = game.getState().dealerValue
+      console.log(game.getState().dealerValue.hi)
+
+      if(dealerValue.hi === dealerValue.lo) {
+        console.log(dealerValue.hi)
+        return dealerValue.hi
+      } else {
+        console.log(dealerValue.hi)
+        return dealerValue.hi + "/" + dealerValue.lo
+      }
+    }
+
+    getPlayerValue() {
+      const playerValue = game.getState().handInfo.right.playerValue
+
+      if(playerValue.hi === playerValue.lo) {
+        return playerValue.hi
+      } else {
+        return playerValue.hi + "/" + playerValue.lo
+      }
+    }
+
+
+
 
     render() {
       if(this.state.betAmount > 0) {
         return (
           <div>
-          <Deck cards={this.state.dealerCards} />
-          <Deck cards={this.state.playerCards} />
-          <button className="modifierButtons" onClick={this.playerHit}>Hit</button>
-          <button className="modifierButtons" onClick={this.dealerHit}>Stick</button>
+          <table id="cardTable">
+            <tr>
+              <div id="dealer">
+                <td className="firstCol"><h3 id="dealerText">Dealer</h3><h1 id="dealerValue">{this.getDealerValue()}</h1></td>
+                <td className="secondCol"><Deck cards={this.state.dealerCards} /></td>
+                <td className="thirdCol"> </td>
+              </div>
+            </tr>
+
+            <tr>
+              <div id="player">
+                <td className="firstCol">
+                  <button className="modifierButtons" onClick={this.playerHit}>Hit</button>
+                  <button className="modifierButtons" onClick={this.dealerHit}>Stick</button>
+                 </td>
+                <td className="secondCol"><Deck cards={this.state.playerCards} /></td>
+                <td className="thirdCol"><h3 id="playerText">Player</h3><h1 id="playerValue">{this.getPlayerValue()}</h1></td>
+
+              </div>
+            </tr>
+          </table>
           </div>
         )
       }
@@ -136,8 +199,6 @@ class Game extends Component {
         return (
           <div>
           <PlaceBet placeBet={this.placeBet} />
-
-          <p>You betted: {this.state.betAmount}</p>
           </div>
         )
       }

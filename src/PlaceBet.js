@@ -62,7 +62,7 @@ class PlaceBet extends Component {
           <button className="quickBetModifier" onClick={() => this.add(10)}>+10</button>
           <button className="quickBetModifier" id="resetBet" onClick={this.resetCounter}>Reset</button>
         </div>
-        <button className="modifierButtons" id="placeBet" onClick={this.placeBet}>Place Bet</button>
+        <button className="betButton" id="placeBet" onClick={this.placeBet}>Place Bet</button>
       </div>
     )
   }
