@@ -51,173 +51,177 @@ p {
 }
 
 #startButton {
-  padding: 15px 72px;
-  font-size: 1.1em;
-}
-
-/****************************************/
-/*             Place Bets
-/****************************************/
-
-.placeBet {
-  width: 100%
-}
-
-#betAmount {
-  display: inline;
-}
-
-.betModifier {
-  margin: auto 20px 20px 20px;
-  padding: 8px 15px;
-  font-size: 1.1em;
-}
-
-#quickAddLabel {
-  font-size: 0.9em;
-  display:inline;
-  padding-right: 5px;
-}
-
-.quickBetModifier {
-  margin: auto 2px 10px 2px;
-  padding: 4px 7px;
-  font-size: 0.7em;
-}
-
-#resetBet {
-  margin-left: 20px;
-}
-
-#placeBet {
-  display: inline-block;
-}
-
-.betButton {
-  vertical-align: middle;
-  padding: 25px 40px;
-  margin: 5px auto 5px 10px;
+  padding: 25px 90px;
   font-size: 1.3em;
 }
 
-/****************************************/
-/*             Game Screen
-/****************************************/
+  /****************************************/
+  /*             Place Bets
+  /****************************************/
 
-#cardTable {
-  margin: 0px auto;
-}
-
-.cards {
-  height: 25vh;
-  margin: 5px 10px;
-  text-align: center;
-  display: inline-block;
-}
-
-#dealer {
-  vertical-align: middle;
-  border: 2px solid black;
-  border-radius: 6px;
-  margin: 10px 40px;
-  padding: 10px 0px;
-}
-
-#player {
-  vertical-align: middle;
-  border: 2px solid rgb(221, 74, 59);
-  border-radius: 6px;
-  margin: 10px 40px;
-  padding: 10px 0px;
-}
-
-#dealerText {
-  text-align: center;
-}
-
-#playerText{
-  color: rgb(221, 74, 59);
-  text-align: center;
-}
-
-#dealerValue {
-  text-align: center;
-}
-
-#playerValue {
-  text-align: center;
-  color: rgb(221, 74, 59);
-}
-
-.modifierButtons {
-  vertical-align: middle;
-  padding: 25px 0px;
-  width: 120px;
-  margin: 5px auto 5px 2px;
-  text-align: center;
-  font-size: 1.3em;
-  font-weight: bold;
-  background-color: rgb(221, 74, 59);
-  border: none;
-  border-radius: 4px;
-}
-
-#playAgainButton {
-  font-size: 1.1em;
-  padding: 20px 10px;
-  background-color: rgb(221, 74, 59);
-  border: none;
-  border-radius: 4px;
-}
-
-.firstCol {
-  width: 10vw;
-}
-
-.secondCol {
-  width: 80vw;
-}
-
-.thirdCol {
-  width: 10vw;
-}
-
-
-
-/****************************************/
-/*             Card animatiosn
-/****************************************/
-
-.slide-in-left
-.slide-in-right {
-  animation-timing-function: linear;
-}
-
-.slide-in-left {
-  animation: 1s slide-in-left 1;
-  transform: translate(-$window-width, 150px) rotate(-50deg);
-}
-
-.slide-in-right {
-  animation: 1s slide-in-right 1;
-  transform: translate($window-width, 150px) rotate(50deg);;
-}
-
-@keyframes slide-in-left {
-  0% {
-    transform: translate(-80vw, 50px) rotate(-40deg);
-  }
-  100% {
-    transform: translate(0px, 0px) rotate(0deg);
-  }
-}
-
-@keyframes slide-in-right {
-  0% {
-    transform: translate(80vw, -50px) rotate(-40deg);
-  }
-  100% {
-    transform: translate(0px, 0px) rotate(0deg);
+  .placeBet {
+    width: 100%
   }
 
-}
+  #betAmount {
+    display: inline;
+  }
+
+  .betModifier {
+    margin: auto 20px 20px 20px;
+    padding: 8px 15px;
+    font-size: 1.1em;
+  }
+
+  #quickAddLabel {
+    font-size: 0.9em;
+    display:inline;
+    padding-right: 5px;
+  }
+
+  .quickBetModifier {
+    margin: auto 2px 10px 2px;
+    padding: 4px 7px;
+    font-size: 0.7em;
+  }
+
+  #resetBet {
+    margin-left: 20px;
+  }
+
+  #placeBet {
+    display: inline-block;
+  }
+
+  .betButton {
+    vertical-align: middle;
+    padding: 25px 40px;
+    margin: 5px auto 5px 10px;
+    font-size: 1.3em;
+  }
+
+  /****************************************/
+  /*             Game Screen
+  /****************************************/
+
+  #cardTable {
+    margin: 0px auto;
+  }
+
+  .cards {
+    height: 25vh;
+    margin: 5px 10px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  #dealer {
+    vertical-align: middle;
+    border: 2px solid black;
+    border-radius: 6px;
+    margin: 10px 40px;
+    padding: 10px 0px;
+  }
+
+  #player {
+    vertical-align: middle;
+    border: 2px solid rgb(221, 74, 59);
+    border-radius: 6px;
+    margin: 10px 40px;
+    padding: 10px 0px;
+  }
+
+  #dealerText {
+    text-align: center;
+  }
+
+  #playerText{
+    color: rgb(221, 74, 59);
+    text-align: center;
+  }
+
+  #dealerValue {
+    text-align: center;
+  }
+
+  #playerValue {
+    text-align: center;
+    color: rgb(221, 74, 59);
+  }
+
+  .modifierButtons {
+    vertical-align: middle;
+    padding: 15px 0px;
+    width: 120px;
+    margin: 4px auto 4px 2px;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color: rgb(221, 74, 59);
+    border: none;
+    border-radius: 4px;
+  }
+
+  .modifierButtons:disabled {
+    background-color: rgb(242, 169, 169);
+  }
+
+  #playAgainButton {
+    font-size: 1.1em;
+    padding: 20px 10px;
+    background-color: rgb(221, 74, 59);
+    border: none;
+    border-radius: 4px;
+  }
+
+  .firstCol {
+    width: 10vw;
+  }
+
+  .secondCol {
+    width: 80vw;
+  }
+
+  .thirdCol {
+    width: 10vw;
+  }
+
+
+
+  /****************************************/
+  /*             Card animatiosn
+  /****************************************/
+
+  .slide-in-left
+  .slide-in-right {
+    animation-timing-function: linear;
+  }
+
+  .slide-in-left {
+    animation: 1s slide-in-left 1;
+    transform: translate(-$window-width, 150px) rotate(-50deg);
+  }
+
+  .slide-in-right {
+    animation: 1s slide-in-right 1;
+    transform: translate($window-width, 150px) rotate(50deg);;
+  }
+
+  @keyframes slide-in-left {
+    0% {
+      transform: translate(-80vw, 50px) rotate(-40deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+
+  @keyframes slide-in-right {
+    0% {
+      transform: translate(80vw, -50px) rotate(-40deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+
+  }

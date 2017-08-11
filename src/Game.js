@@ -205,108 +205,108 @@ class Game extends Component {
       {
         betAmount: 0
       })
-  }
+    }
 
-  resetGame() {
+    resetGame() {
+      return this.setState({
+        gameStarted: true,
+        gameOver : false,
+        feedbackMessage: "",
+        game: new GameEngine(),
+        playerCards: [],
+        dealerCards: []
+      }, this.getInitialCards())
+    }
 
-    return this.setState({
-      gameStarted: true,
-      gameOver : false,
-      feedbackMessage: "",
-      game: new GameEngine(),
-      playerCards: [],
-      dealerCards: []
-    }, this.getInitialCards())
-  }
+    render() {
+      if(this.state.gameOver) {
+        return (
+          <div>
+            <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
+            <table id="cardTable">
+              <tbody>
+                <tr>
+                  <div id="dealer">
+                    <td className="firstCol"><h3 id="dealerText">Dealer</h3><h1 id="dealerValue">{this.getDealerValue()}</h1></td>
+                    <td className="secondCol"><Deck cards={this.state.dealerCards} flipHoleCard={this.state.flipHoleCard}/></td>
+                    <td className="thirdCol"> </td>
+                  </div>
+                </tr>
 
-  render() {
-    if(this.state.gameOver) {
+                <tr>
+                  <div id="player">
+                    <td className="firstCol">
+                      <h2>{this.state.feedbackMessage}</h2>
+                      <button id="playAgainButton" onClick={this.resetGame}>Play again </button>
+                    </td>
+                    <td className="secondCol"><Deck cards={this.state.playerCards} /></td>
+                    <td className="thirdCol"><h3 id="playerText">Player</h3><h1 id="playerValue">{this.getPlayerValue()}</h1></td>
+
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+
+      if(this.state.betAmount > 0 && !this.state.gameOver && this.state.dealerCards.length < 1) {
+        this.getInitialCards()
+      }
+
+      if(this.state.betAmount > 0 && !this.state.gameOver && this.state.dealerCards.length > 0) {
+        return (
+          <div>
+            <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
+            <table id="cardTable">
+              <tbody>
+                <tr>
+                  <div id="dealer">
+                    <td className="firstCol"><h3 id="dealerText">Dealer</h3><h1 id="dealerValue">{this.getDealerValue()}</h1></td>
+                    <td className="secondCol"><Deck cards={this.state.dealerCards} /></td>
+                    <td className="thirdCol"> </td>
+                  </div>
+                </tr>
+
+                <tr>
+                  <div id="player">
+                    <td className="firstCol">
+                      <button className="modifierButtons" onClick={this.playerHit}>Hit</button>
+                      <button className="modifierButtons" onClick={this.playerHit} disabled>Double</button>
+                      <button className="modifierButtons" onClick={this.dealerHit}>Stick</button>
+                    </td>
+                    <td className="secondCol"><Deck cards={this.state.playerCards} /></td>
+                    <td className="thirdCol"><h3 id="playerText">Player</h3><h1 id="playerValue">{this.getPlayerValue()}</h1></td>
+
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+
+      if(this.state.gameStarted) {
+        return (
+          <div>
+            <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
+            <PlaceBet placeBet={this.placeBet} />
+          </div>
+        )
+      }
       return (
         <div>
           <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
-          <table id="cardTable">
-            <tbody>
-              <tr>
-                <div id="dealer">
-                  <td className="firstCol"><h3 id="dealerText">Dealer</h3><h1 id="dealerValue">{this.getDealerValue()}</h1></td>
-                  <td className="secondCol"><Deck cards={this.state.dealerCards} flipHoleCard={this.state.flipHoleCard}/></td>
-                  <td className="thirdCol"> </td>
-                </div>
-              </tr>
-
-              <tr>
-                <div id="player">
-                  <td className="firstCol">
-                    <h2>{this.state.feedbackMessage}</h2>
-                    <button id="playAgainButton" onClick={this.resetGame}>Play again </button>
-                  </td>
-                  <td className="secondCol"><Deck cards={this.state.playerCards} /></td>
-                  <td className="thirdCol"><h3 id="playerText">Player</h3><h1 id="playerValue">{this.getPlayerValue()}</h1></td>
-
-                </div>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      )
-    }
-
-    if(this.state.betAmount > 0 && !this.state.gameOver && this.state.dealerCards.length < 1) {
-      this.getInitialCards()
-    }
-
-    if(this.state.betAmount > 0 && !this.state.gameOver && this.state.dealerCards.length > 0) {
-      return (
-        <div>
-          <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
-          <table id="cardTable">
-            <tbody>
-              <tr>
-                <div id="dealer">
-                  <td className="firstCol"><h3 id="dealerText">Dealer</h3><h1 id="dealerValue">{this.getDealerValue()}</h1></td>
-                  <td className="secondCol"><Deck cards={this.state.dealerCards} /></td>
-                  <td className="thirdCol"> </td>
-                </div>
-              </tr>
-
-              <tr>
-                <div id="player">
-                  <td className="firstCol">
-                    <button className="modifierButtons" onClick={this.playerHit}>Hit</button>
-                    <button className="modifierButtons" onClick={this.dealerHit}>Stick</button>
-                  </td>
-                  <td className="secondCol"><Deck cards={this.state.playerCards} /></td>
-                  <td className="thirdCol"><h3 id="playerText">Player</h3><h1 id="playerValue">{this.getPlayerValue()}</h1></td>
-
-                </div>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      )
-    }
-
-    if(this.state.gameStarted) {
-      return (
-        <div>
-          <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
-          <PlaceBet placeBet={this.placeBet} />
-        </div>
-      )
-    }
-    return (
-      <div>
-        <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
-        <p id="appIntro">
+          <p id="appIntro">
           Click 'play' to get started.
-        </p>
-        <button id="startButton" onClick={this.startGame}>
-          Play
-        </button>
-      </div>
-    )
+          </p>
+          <button id="startButton" onClick={this.startGame}>
+            Play
+          </button>
+        </div>
+      )
+    }
   }
-}
 
 
-export default Game;
+  export default Game;
