@@ -117,22 +117,22 @@ p {
 
 #dealer {
   vertical-align: middle;
-    border: 2px solid black;
-    border-radius: 6px;
-    margin: 10px 40px;
-    padding: 10px 0px;
+  border: 2px solid black;
+  border-radius: 6px;
+  margin: 10px 40px;
+  padding: 10px 0px;
 }
 
 #player {
   vertical-align: middle;
-    border: 2px solid rgb(221, 74, 59);
-    border-radius: 6px;
-    margin: 10px 40px;
-    padding: 10px 0px;
+  border: 2px solid rgb(221, 74, 59);
+  border-radius: 6px;
+  margin: 10px 40px;
+  padding: 10px 0px;
 }
 
 #dealerText {
-text-align: center;
+  text-align: center;
 }
 
 #playerText{
