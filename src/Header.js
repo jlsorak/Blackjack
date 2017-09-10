@@ -8,6 +8,12 @@ class Header extends Component {
     }
   }
 
+  showHideBankBalance() {
+    if (this.props.bank > 0) {
+      return <h2>Bank: £{this.props.bank}</h2>
+    }
+  }
+
   displayWinnings() {
     if (this.props.gameOver) {
       return (<h4></h4>)
@@ -15,27 +21,27 @@ class Header extends Component {
   }
 
   render() {
-      return (
-        <div className="appHeader">
+    return (
+      <div className="appHeader">
         <table>
-        <tbody>
-        <tr>
-        <td className="firstCol">
-          {this.displayWinnings()}
-        </td>
-        <td className="secondCol">
-          <img src='/cards/ace_of_spades.svg' className="appLogo" alt="logo" />
-          <h1>Blackjack</h1>
-        </td>
-        <td className="thirdCol">
-          <h2>Bank: £{this.props.bank}</h2>
-          {this.showHideBetAmount()}
-        </td>
-        </tr>
-        </tbody>
+          <tbody>
+            <tr>
+              <td className="firstCol">
+                {this.displayWinnings()}
+              </td>
+              <td className="secondCol">
+                <img src='/cards/ace_of_spades.svg' className="appLogo" alt="logo" />
+                <h1>Blackjack</h1>
+              </td>
+              <td className="thirdCol">
+                {this.showHideBankBalance()}
+                {this.showHideBetAmount()}
+              </td>
+            </tr>
+          </tbody>
         </table>
-        </div>
-      )
+      </div>
+    )
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 class PlaceBet extends Component {
 
@@ -8,14 +9,16 @@ class PlaceBet extends Component {
     this.remove = this.remove.bind(this)
     this.resetCounter = this.resetCounter.bind(this)
     this.placeBet = this.placeBet.bind(this)
+    this.startingBankBalance = this.startingBankBalance.bind(this)
     this.state = {
-      count: 0
+      count: 0,
+      bankAmount: 10
     }
   }
 
 
   add(noToAdd) {
-    if (this.state.count + noToAdd > 50) {
+    if (this.state.count + noToAdd > this.state.bankAmount ) {
       this.setState({
         count: 50
       })
@@ -45,24 +48,51 @@ class PlaceBet extends Component {
   }
 
   placeBet() {
-    this.props.placeBet(this.state.count)
+    this.props.placeBet(this.state.count, this.state.bankAmount)
+  }
+
+  handleRadioSelect(values) {
+    console.log(values)
+    this.setState({ bankAmount: values })
+  }
+
+  startingBankBalance() {
+    if (this.props.bank === null) {
+      return (
+        <div className="startingBankBalance">
+          <h4>Select your starting bank balance:</h4>
+          <ToggleButtonGroup type="radio" defaultValue={this.state.bankAmount} onChange={this.handleRadioSelect} name="options">
+            <ToggleButton className="bankBalanceRadio" value={10}>
+              £10
+            </ToggleButton>
+            <ToggleButton className="bankBalanceRadio" value={50}>
+              £50
+            </ToggleButton>
+            <ToggleButton className="bankBalanceRadio" value={100}>
+              £100
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+      )
+    }
   }
 
   render() {
     return (
-      <div>
-        <p>Place your bets:</p>
-        <button className="betModifier" onClick={() => this.remove(1)}>-</button>
+      <div className="menuContainer">
+        {this.startingBankBalance()}
+        <h4>Place your bets:</h4>
+        <Button className="betModifier" onClick={() => this.remove(1)}>-</Button>
         <p id="betAmount">{this.state.count}</p>
-        <button className="betModifier" onClick={() => this.add(1)}>+</button>
+        <Button className="betModifier" onClick={() => this.add(1)}>+</Button>
         <div className="placeBet">
           <p id="quickAddLabel">Quick add:</p>
-          <button className="quickBetModifier" onClick={() => this.add(2)}>+2</button>
-          <button className="quickBetModifier" onClick={() => this.add(5)}>+5</button>
-          <button className="quickBetModifier" onClick={() => this.add(10)}>+10</button>
-          <button className="quickBetModifier" id="resetBet" onClick={this.resetCounter}>Reset</button>
+          <Button className="quickBetModifier" onClick={() => this.add(2)}>+2</Button>
+          <Button className="quickBetModifier" onClick={() => this.add(5)}>+5</Button>
+          <Button className="quickBetModifier" onClick={() => this.add(10)}>+10</Button>
+          <Button className="quickBetModifier" id="resetBet" onClick={this.resetCounter}>Reset</Button>
         </div>
-        <button className="betButton" id="placeBet" onClick={this.placeBet}>Place Bet</button>
+        <Button className="betButton" id="placeBet" onClick={this.placeBet}>Place Bet</Button>
       </div>
     )
   }

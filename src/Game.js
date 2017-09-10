@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PlaceBet from './PlaceBet.js';
 import Deck from './Deck.js';
 import Header from './Header.js';
+import { Button } from 'react-bootstrap';
+
 
 const blackjack = require('engine-blackjack')
 const actions = blackjack.actions
@@ -18,7 +20,7 @@ class Game extends Component {
       gameOver : false,
       feedbackMessage: "",
       game: new GameEngine(),
-      bank: 50
+      bank: null
     }
     console.log(this.state.game.getState().stage)
     this.startGame = this.startGame.bind(this)
@@ -43,13 +45,18 @@ class Game extends Component {
     })
   }
 
-  placeBet(betAmount) {
+  placeBet(betAmount, bankAmount) {
+    if(bankAmount) {
+      this.setState({ bank: bankAmount})
+    }
+
     this.setState((prevState, props) => {
       return {
         betAmount: betAmount,
         bank: prevState.bank - betAmount
       }
     })
+
   }
 
   getInitialCards(amount) {
@@ -208,6 +215,7 @@ class Game extends Component {
     }
 
     resetGame() {
+
       return this.setState({
         gameStarted: true,
         gameOver : false,
@@ -272,7 +280,6 @@ class Game extends Component {
                   <div id="player">
                     <td className="firstCol">
                       <button className="modifierButtons" onClick={this.playerHit}>Hit</button>
-                      <button className="modifierButtons" onClick={this.playerHit} disabled>Double</button>
                       <button className="modifierButtons" onClick={this.dealerHit}>Stick</button>
                     </td>
                     <td className="secondCol"><Deck cards={this.state.playerCards} /></td>
@@ -290,19 +297,22 @@ class Game extends Component {
         return (
           <div>
             <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
-            <PlaceBet placeBet={this.placeBet} />
+            <PlaceBet bank={this.state.bank} placeBet={this.placeBet} />
           </div>
         )
       }
+
       return (
         <div>
           <Header bank={this.state.bank} betAmount={this.state.betAmount}/>
-          <p id="appIntro">
-          Click 'play' to get started.
-          </p>
-          <button id="startButton" onClick={this.startGame}>
-            Play
-          </button>
+          <div className="menuContainer">
+            <h4 id="appIntro">
+              Click 'play' to get started.
+            </h4>
+            <Button id="startButton" onClick={this.startGame}>
+              Play
+            </Button>
+          </div>
         </div>
       )
     }
